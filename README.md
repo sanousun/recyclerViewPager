@@ -2,6 +2,10 @@
 
 通过 RecyclerView 的方式以更少的用户感知去实现基于 ViewPager 录播图
 
+## 注意
+supportVersion > 25.1.0，这个版本之后才有的 PagerSnapHelper
+minSdkVersion > 18，小于 18 感觉也没啥意义了
+
 ## 实现原理
 
 PagerSnapHelper 可以让 RecyclerView 实现 ViewPager 的效果，通过参考 PagerSnapHelper 创建的 PagerIndicatorHelper 则可以实现 ViewPager.OnPageChangeListener 回调，有了这两个就可以完全模拟简单 ViewPager 的效果了

@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.android.compileSdkVersion
     defaultConfig {
         applicationId "com.sanousun.recyclerviewpager"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.compileSdkVersion
         versionCode 1
         versionName "1.0"
     }
