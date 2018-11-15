@@ -10,29 +10,25 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * @author dashu
- * @date 2018/4/25
- */
-public class TestScrollAdapter extends RecyclerView.Adapter<TestScrollAdapter.TestScrollHolder> {
+public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.DemoHolder> {
 
     private Context mContext;
     private List<String> mData;
 
-    public TestScrollAdapter(Context context, List<String> data) {
+    public DemoAdapter(Context context, List<String> data) {
         mContext = context;
         mData = data;
     }
 
     @NonNull
     @Override
-    public TestScrollHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_test_scroll, parent, false);
-        return new TestScrollHolder(view);
+    public DemoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_demo, parent, false);
+        return new DemoHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TestScrollHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DemoHolder holder, int position) {
         holder.mTextView.setText(mData.get(position));
     }
 
@@ -41,11 +37,11 @@ public class TestScrollAdapter extends RecyclerView.Adapter<TestScrollAdapter.Te
         return mData.size();
     }
 
-    static class TestScrollHolder extends RecyclerView.ViewHolder {
+    static class DemoHolder extends RecyclerView.ViewHolder {
 
         TextView mTextView;
 
-        TestScrollHolder(View itemView) {
+        DemoHolder(View itemView) {
             super(itemView);
             mTextView = itemView.findViewById(R.id.tv);
         }

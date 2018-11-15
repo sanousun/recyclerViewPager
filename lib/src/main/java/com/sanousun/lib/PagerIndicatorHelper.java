@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author dashu
- * @date 2018/10/30
+ * @date 2018/11/4
  * 仿照 {@link android.support.v7.widget.PagerSnapHelper} 写的滑动回调，
  * 对外提供接口回调，格式参照 {@link android.support.v4.view.ViewPager.OnPageChangeListener}
  */

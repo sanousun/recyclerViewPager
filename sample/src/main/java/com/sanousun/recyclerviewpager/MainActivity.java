@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
             data.add("" + i);
         }
-        TestScrollAdapter adapter = new TestScrollAdapter(this, data);
+        DemoAdapter adapter = new DemoAdapter(this, data);
         pagerAdapter = new PagerAdapter(adapter);
         pagerAdapter.setCircle(true);
         pagerAdapter.setCarousel(true);

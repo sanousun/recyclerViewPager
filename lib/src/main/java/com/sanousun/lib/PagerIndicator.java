@@ -15,7 +15,7 @@ import android.view.View;
 
 /**
  * @author dashu
- * @date 2018/10/30
+ * @date 2018/11/4
  * 轮播图指示器
  */
 public class PagerIndicator extends View {
