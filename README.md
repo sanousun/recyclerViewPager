@@ -1,10 +1,23 @@
 # RecyclerViewPager
 
-通过 RecyclerView 的方式以更少的用户感知去实现基于 ViewPager 录播图
+通过 RecyclerView 的方式以更少的用户感知去实现基于 ViewPager 轮播图
 
 ## 注意
 supportVersion > 25.1.0，这个版本之后才有的 PagerSnapHelper
 minSdkVersion > 18，小于 18 感觉也没啥意义了
+
+## 引入
+
+```
+repositories {
+    maven { url 'https://dl.bintray.com/shenhui1876/maven' }
+}
+
+dependencies {
+    ...
+    implementation 'com.sanousun:recycler-view-pager:1.0.0@aar'
+}
+```
 
 ## 实现原理
 

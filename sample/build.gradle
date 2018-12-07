@@ -17,7 +17,14 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://dl.bintray.com/shenhui1876/maven' }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':lib')
+    implementation "com.android.support:appcompat-v7:$rootProject.android.supportVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.android.supportVersion"
+    implementation 'com.sanousun:recycler-view-pager:1.0.0@aar'
+//    implementation project(':lib')
 }
