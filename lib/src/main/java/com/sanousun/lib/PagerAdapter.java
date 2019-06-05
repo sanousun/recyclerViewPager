@@ -9,6 +9,7 @@ import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +43,33 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
      * 仿造 PagerSnapHelper 实现对 Page 位置的监听
      */
     private PagerIndicatorHelper mPagerIndicatorHelper;
-    private OnPageScrolledListener mOnPageScrolledListener;
+    private List<OnPageScrollListener> mOnPageScrollListeners;
+
+    /**
+     * 设置滚动监听，可用于 PageIndicator 的展示
+     * 方便改造现有基于 ViewPager 的轮播
+     *
+     * @param listener 滚动监听接口
+     */
+    public void addOnPageScrollListener(@NonNull OnPageScrollListener listener) {
+        if (mOnPageScrollListeners == null) {
+            mOnPageScrollListeners = new ArrayList<>();
+        }
+        mOnPageScrollListeners.add(listener);
+    }
+
+    public void removeOnScrollListener(@NonNull OnPageScrollListener listener) {
+        if (mOnPageScrollListeners != null) {
+            mOnPageScrollListeners.remove(listener);
+        }
+    }
+
+    public void clearOnScrollListeners() {
+        if (mOnPageScrollListeners != null) {
+            mOnPageScrollListeners.clear();
+        }
+    }
+
     /**
      * 是否轮播
      */
@@ -142,17 +169,6 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         notifyDataSetChanged();
     }
 
-    /**
-     * 设置滚动监听，可用于 PageIndicator 的展示
-     * 参数和{@link android.support.v4.view.ViewPager.OnPageChangeListener#onPageScrolled(int, float, int)} 一致，
-     * 方便改造现有基于 ViewPager 的轮播
-     *
-     * @param onPageScrolledListener 滚动监听接口
-     */
-    public void setOnPageScrolledListener(OnPageScrolledListener onPageScrolledListener) {
-        mOnPageScrolledListener = onPageScrolledListener;
-    }
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -234,8 +250,14 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (mOnPageScrolledListener != null) {
-            mOnPageScrolledListener.onPageScrolled(getRealPosition(position), positionOffset, positionOffsetPixels);
+        if (mOnPageScrollListeners != null) {
+            for (OnPageScrollListener listener : mOnPageScrollListeners) {
+                listener.onPageScrolled(
+                        getRealItemCount(),
+                        getRealPosition(position),
+                        positionOffset,
+                        positionOffsetPixels);
+            }
         }
     }
 
@@ -247,16 +269,5 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onPageScrollStateChanged(int state) {
         mRecyclerState = state;
-    }
-
-    public interface OnPageScrolledListener {
-        /**
-         * item 滑动回调方法，参数等同于viewPager的回调函数
-         *
-         * @param position             左侧展示的item position
-         * @param positionOffset       滑动距离的百分比
-         * @param positionOffsetPixels 滑动距离
-         */
-        void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);
     }
 }

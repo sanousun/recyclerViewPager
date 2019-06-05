@@ -18,7 +18,7 @@ import android.view.View;
  * @date 2018/11/4
  * 轮播图指示器
  */
-public class PagerIndicator extends View {
+public class PagerIndicator extends View implements OnPageScrollListener {
 
     private int mIndicatorSize;
     private int mIndicatorSpace;
@@ -60,17 +60,6 @@ public class PagerIndicator extends View {
         mOvalPaint = new Paint();
         mOvalPaint.setAntiAlias(true);
         mOvalRectF = new RectF();
-    }
-
-    public void setIndicatorCount(int indicatorCount) {
-        mIndicatorCount = indicatorCount;
-        requestLayout();
-    }
-
-    public void setIndicatorScrolled(int indicatorSelected, float indicatorOffset) {
-        mIndicatorSelected = indicatorSelected;
-        mIndicatorOffset = indicatorOffset;
-        invalidate();
     }
 
     @Override
@@ -119,5 +108,17 @@ public class PagerIndicator extends View {
     private int dpToPixel(float value) {
         return (int) (TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics()) + 0.5f);
+    }
+
+    @Override
+    public void onPageScrolled(int totalItem, int position, float positionOffset, int positionOffsetPixels) {
+        mIndicatorSelected = position;
+        mIndicatorOffset = positionOffset;
+        if (mIndicatorCount != totalItem) {
+            mIndicatorCount = totalItem;
+            requestLayout();
+        } else {
+            invalidate();
+        }
     }
 }

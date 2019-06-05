@@ -34,13 +34,7 @@ public class MainActivity extends AppCompatActivity {
         pagerAdapter = new PagerAdapter(adapter);
         pagerAdapter.setCircle(true);
         pagerAdapter.setCarousel(true);
-        pagerIndicator.setIndicatorCount(pagerAdapter.getRealItemCount());
-        pagerAdapter.setOnPageScrolledListener(new PagerAdapter.OnPageScrolledListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                pagerIndicator.setIndicatorScrolled(position, positionOffset);
-            }
-        });
+        pagerAdapter.addOnPageScrollListener(pagerIndicator);
         recyclerView.setAdapter(pagerAdapter);
         CheckBox circle = findViewById(R.id.circle);
         CheckBox carousel = findViewById(R.id.carousel);

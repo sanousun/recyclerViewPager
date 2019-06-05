@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
@@ -6,14 +7,14 @@ android {
     defaultConfig {
         minSdkVersion rootProject.android.minSdkVersion
         targetSdkVersion rootProject.android.targetSdkVersion
-        versionCode 10001
-        versionName "1.0.1"
+        versionCode 10000
+        versionName "1.0.0"
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -21,13 +22,14 @@ android {
 publish {
     userOrg = 'shenhui1876'
     groupId = 'com.sanousun'
-    artifactId = 'recycler-view-pager'
-    publishVersion = '1.0.1'
-    desc = '基于 RecyclerView 实现的类似于 ViewPager 的 recyclerViewPager'
+    artifactId = 'recycler-view-pager-x'
+    publishVersion = '1.0.0'
+    desc = '基于 RecyclerView 实现的类似于 ViewPager 的 recyclerViewPager，android X版本'
     website = 'https://github.com/sanousun/recyclerViewPager'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:recyclerview-v7:$rootProject.android.supportVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${rootProject.android.kotlinVersion}"
+    implementation "androidx.recyclerview:recyclerview:${rootProject.android.androidXRecyclerView}"
 }
